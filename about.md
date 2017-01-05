@@ -4,11 +4,11 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Hello everyone! My name is Andrew Lim
 
 ### More Information
 
-I like data science, beer, boardgames, hockey,
+I like data science, boardgames, beer, and hockey.
 
 ### Contact me
 
