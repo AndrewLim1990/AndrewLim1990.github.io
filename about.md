@@ -8,8 +8,8 @@ Some information about you!
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+I like data science, beer, boardgames, hockey,
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[andrewlim90@gmail.com](mailto:andrewlim90@gmail.com)
