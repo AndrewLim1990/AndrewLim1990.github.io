@@ -1,7 +1,7 @@
 # Site settings
 title: Andrew Lim
 description: 'Data Scientist'
-url: 'https://github.com/AndrewLim1990/AndrewLim1990.github.io'
+url: 'https://github.com/AndrewLim1990/'
 baseurl: '/AndrewLim1990.github.io/'
 # google_analytics: 'UA-XXXXXX-X'
 # disqus_shortname: 'your-disqus-name'
@@ -9,9 +9,8 @@ baseurl: '/AndrewLim1990.github.io/'
 author:
   name: 'Andrew Lim'
   email: andrewlim90@gmail.com
-  twitter_username: joshgerdes
-  facebook_username: joshgerdes
-  github_username:  joshgerdes
+  twitter_username: noLIMbs1990
+  github_username:  andrewlim1990
   linkedin_username:  joshgerdes
 
 defaults:
