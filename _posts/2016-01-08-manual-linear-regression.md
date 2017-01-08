@@ -1,8 +1,8 @@
 ---
 title:  "Manual Linear Regression"
 date:   2016-01-08 15:04:23
-categories: [jekyll]
-tags: [jekyll]
+categories: [linear-regression]
+tags: [linear-regression]
 ---
 Often, I find that people rely heavily on packages/tools to perform there analysis. While abstraction is great, people often forget or lose sight of fundamentals. This post aims to redevelop some linear regression fundamentals. So, let's get some fundamentals down by doing manual linear regression rather than using `lm()`!
 
