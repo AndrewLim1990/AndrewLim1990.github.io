@@ -1,43 +1,59 @@
+# Welcome to Jekyll!
+#
+
 # Site settings
-title: Andrew Lim - Data Scientist - Malware Analyst - Reverse Engineer
-description: "A blog about Data Science and Malware"
-baseurl: "/space-jekyll-template" # for test: remove string '/space-jekyll-templa' to ''
-url: "http://victorvoid.github.io" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https:yourusername.githu.io'
-# User settings
-username: Andrew Lim
-user_title: Andrew Lim - Data Scientist
-email: andrewlim90@gmail.com
-twitter_username: noLIMbs1990
-github_username:  andrewlim1990
+title: Spectral
+description: |
+  Another fine responsive  
+  site template freebie  
+  crafted by [HTML5 UP](http://html5up.net)
+owner: Your Name # or company name
+first_published: 2016 # if migrating another site, the year of your first publish
+email: your-email@domain.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://yourdomain.com" # the base hostname & protocol for your site
+social:
+  twitter: https://twitter.com/<username>
+  github: https://github.com/<username>
+  linkedin-square: https://linkedin.com/in/<username>
+  facebook-official: https://facebook.com/<username>
+  google-plus-square: https://plus.google.com/u/0/+<username>
+  #email: /contact/
+  #flickr:
+  #instagram:
+  #youtube-square:
+  #spotify:
+  #stack-overflow:
+  #vimeo:
+  #reddit:
+  #stubleupon:
+  #delicious:
+  #pied-piper:
+  #digg:
+  #soundcloud:
+  #deviantart:
+  #angellist:
+  #tumblr-square:
+  #stackexchange:
+  #weibo:
+  #trello:
+  #foursquare:
+  #linux:
+  #bitbucket-square:
+  #vk:
+  #slack:
+  #vine:
+  #weixin:
+  #yelp:
+  #skyatlas:
+  #leanpub:
+  #connectdevelop:
+  #ils:
+  #forumbee:
+  #tripadvisor:
+  #amazon:
 
 # Build settings
 markdown: kramdown
-highlighter: rouge
-permalink: /:title/
-
-
-# html minify
-compress_html:
-  clippings: all
-  comments: all
-  endings: []
-  profile: false
-
-# Links to include in menu navigation
-links:
-  - title: home
-    url: /
-  - title: my posts
-    url: /posts
-  - title: series
-    url: /series
-  - title: tags
-    url: /tags
-  - title: about me
-    url: /about
-# projects in header index
-projects:
-  - name: animal_shelter_outcomes
-    url: https://github.com/AndrewLim1990/animal_shelter_outcome
-# exclude my node related stuff
-exclude: ['package.json', 'src', 'node_modules']
+#sass:
+#  style: compressed
