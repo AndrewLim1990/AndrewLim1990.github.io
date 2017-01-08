@@ -1,8 +1,8 @@
 # Site settings
 title: Andrew Lim
 description: 'Data Scientist'
-url: 'http://AndrewLim1990.github.io'
-baseurl: '/'
+url: 'https://github.com/AndrewLim1990'
+baseurl: '/AndrewLim1990.github.io/'
 # google_analytics: 'UA-XXXXXX-X'
 # disqus_shortname: 'your-disqus-name'
 
