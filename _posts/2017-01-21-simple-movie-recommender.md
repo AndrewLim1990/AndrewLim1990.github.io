@@ -124,25 +124,26 @@ y_raw
 
 
 
+
 The above table is showing us our "database". As we can see, Kitson has yet to watch "Two Lovers" as it is filled with a `NaN`. Our main job is to be able to predict what each of the `NaN`'s should be.
 
 Let's first assume that each user provides us with their list of preferences for movies. Let's first say that Kitson really likes romantic movies and really hates action movies. We can represent this via:
 
-$$\beta_{Kitson} = [4.5, 1]$$
+`beta_Kitson` = [4.5, 1]
 
 In the equation above, the first number represents, on a scale of 0 to 5, how much Kitson likes romantic movies. Similarily the second number represents how much Kitson likes action movies.
 
 Next, let's assume that each movie also has a "genre score" saying how romantic or action packed a movie is. We can do this via:
 
-$$x_{twolovers} = [0.95, 0.01]$$
+`x_twolovers` = [0.95, 0.01]
 
 In the above equation, the first number represents how romantic the movie is on a scale of 0 to 1. The same is true for the second value on measuring how action packed a movie is.
 
-It should be noted that the assumptions of knowing $\beta$ and $x$ will eventually be discarded. For now however, let's assume that all users have given us their preferences, $\beta_{user}$ and each director has given us a genre score for each movie $x_{movie}$.
+It should be noted that the assumptions of knowing `beta` and `x` will eventually be discarded. For now however, let's assume that all users have given us their preferences, `beta_user`, and each director has given us a genre score for each movie `x_movie`
 
-Next, we can multiply $x_{twolovers}$ and $\beta_{Kitson}$ to get Kitson's predicted score of "Two Lovers":
+Next, we can find the dot product of `x_twolovers` and `beta_Kitson` to get Kitson's predicted score for "Two Lovers":
 
-$$x_{twolovers} \cdot \beta_{kitson}^T = 4.285$$
+`x_twolovers`  dot  `beta_Kitson` = 4.285
 
 Now, we can make a guess that Kitson will rate "Two Lovers" as a 4.285
 
@@ -497,7 +498,7 @@ init_user_errors
 
 
 
-Can we make the errors associated with each user smaller? Perhaps we can adjust our users $\beta$ preferences such that we achieve a smaller error. Alternatively, we can adjust our movie's $x$ "genre-score" to achieve less error. Turns out we can do both simultaneously! Now, our new goal is to choose the value of $\beta$ and $x$ such that we achieve the lowest possible error. This is a minimization problem. For the sake of clarity and brevity, I will skip over a lot of the mathematically dense theory and focus more on implementation.
+Can we make the errors associated with each user smaller? Perhaps we can adjust our users `beta` preferences such that we achieve a smaller error. Alternatively, we can adjust our movie's `x` "genre-score" to achieve less error. Turns out we can do both simultaneously! Now, our new goal is to choose the value of `beta` and `x` such that we achieve the lowest possible error. This is a minimization problem. For the sake of clarity and brevity, I will skip over a lot of the mathematically dense theory and focus more on implementation.
 
 First, we need a way of calculating the error:
 
@@ -539,7 +540,7 @@ def compute_error(X_beta, y, rated, reg_coeff, num_features):
 #### Outputs of  `compute_error`:
 Though quite intimidating, the function `compute_error` above is quite simple. Its main purpose is to compute `J` which is called the "cost". The "cost" is the thing that we are trying to minimize. "Cost" is pretty much the same thing as squared error and for the sake of this post, we can just think of "cost" and "squared error" to be the same thing.
 
-The other output `X_beta_gradient` is the gradient of cost. In order to find the minimum of cost, we must take the derivative of cost with respective to $x$ and $\beta$ separatley. `X_beta_gradient` can be thought of as the derivative of the cost function. For those who are interested in this, please [click here](https://en.wikipedia.org/wiki/Gradient_descent)
+The other output `X_beta_gradient` is the gradient of cost. In order to find the minimum of cost, we must take the derivative of cost with respective to `x` and `beta` separatley. `X_beta_gradient` can be thought of as the derivative of the cost function. For those who are interested in this, please [click here](https://en.wikipedia.org/wiki/Gradient_descent)
 
 #### Inputs of  `compute_error`:
 `X_beta` value is the genre-score and user preference arrays unrolled into a single vector array. This will be made more clear later.
@@ -554,7 +555,7 @@ The other output `X_beta_gradient` is the gradient of cost. In order to find the
 
 #### Magic Machine Learning Stuff:
 
-Remember before when I made the assumptions that we knew $x$ and $\beta$? Well now let's do away with those assumptions. Let's just make $x$ and $\beta$ totally random and see if our algorithm can find optimal values for them.
+Remember before when I made the assumptions that we knew `x` and `beta`? Well now let's do away with those assumptions. Let's just make `x` and `beta` totally random and see if our algorithm can find optimal values for them.
 
 
 ```python
@@ -597,7 +598,7 @@ beta
 
 
 
-Now that the values for $x$ and $\beta$ are totally random ones. Let's now make the inputs that required to use `compute_cost`:
+Now that the values for `x` and `beta` are totally random ones. Let's now make the inputs that required to use `compute_cost`:
 
 
 ```python
@@ -730,9 +731,9 @@ J
 
 
 
-The above is showing us that for our initial values of $x$ and $\beta$ we have an "error" of 154. Are there different values of $x$ and $\beta$ that will have less error? Of course there are! We just used random ones to start off with.
+The above is showing us that for our initial values of `x` and `beta` we have an "error" of 154. Are there different values of `x` and `beta` that will have less error? Of course there are! We just used random ones to start off with.
 
-Next, we will be determining the values of $x$ and $\beta$ that will minimize the "error" by using scipy's [`minimize`](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.minimize.html) function combined with our `compute_error` function.
+Next, we will be determining the values of `x` and `beta` that will minimize the "error" by using scipy's [`minimize`](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.minimize.html) function combined with our `compute_error` function.
 
 First however, we are going to center/normalize our ratings for each movie by subtracting the mean rating for each movie. By doing this, each movie will have a mean rating centered at zero. Although the reason why we do this is not that important or covered in this post, briefly, it is done so that we obtain reasonable results for users who have not yet rated anything.
 
@@ -832,7 +833,7 @@ y_norm
 
 
 
-Now, we can use the `minimize` function in order to find the values of $x$ and $\beta$ such that cost is minimized:
+Now, we can use the `minimize` function in order to find the values of `x` and `beta` such that cost is minimized:
 
 
 ```python
@@ -844,7 +845,7 @@ min_results = minimize(fun=compute_error,
                        options={'maxiter':1000})      
 ```
 
-Our learned $x$ and $\beta$ values will be stored in `min_results['x']`. We will need reconstruct $x$ and $\beta$ by undoing our "unrolling" that we did earlier. Additionally, we must undo the normalization on the predicted $y$ values that we did earlier:
+Our learned `x` and `beta` values will be stored in `min_results['x']`. We will need reconstruct `x` and `beta` by undoing our "unrolling" that we did earlier. Additionally, we must undo the normalization on the predicted `y` values that we did earlier:
 
 
 ```python
@@ -1076,7 +1077,7 @@ If we only look at the raw data and focus on Kitson's ratings, we can guess that
 
 #### More machine learning magic:
 
-Something awesome has happened. At no point in time did we tell the algorithm to be trying to make features of genre scores for "Romance" and "Action". The algorithm has seemed to do this automatically. The algorithm has "learned" its own features by finding patterns in the dataset. As a concrete example, the algorithm essentially "notices" that users that have enjoyed "Love Everywhere" and "Love Always" tend to also enjoy "Two Lovers". From this, the algorithm adjusts the parameters in $x$ to reflect that these three movie are similar.
+Something awesome has happened. At no point in time did we tell the algorithm to be trying to make features of genre scores for "Romance" and "Action". The algorithm has seemed to do this automatically. The algorithm has "learned" its own features by finding patterns in the dataset. As a concrete example, the algorithm essentially "notices" that users that have enjoyed "Love Everywhere" and "Love Always" tend to also enjoy "Two Lovers". From this, the algorithm adjusts the parameters in `x` to reflect that these three movie are similar.
 
 Extending this logic, we can give this algorithm a very large database of movies and tell it to learn 20 features instead of just having two of "Romance" and "Action". In fact, these features may have nothing to do with genres at all. The algorithm could find that people who like actor "George Clooney" always rate his movies very highly and it would have this as a feature if it is what minimizes the cost most effectively.
 
