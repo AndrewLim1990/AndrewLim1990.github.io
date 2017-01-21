@@ -1,3 +1,9 @@
+---
+title:  "Movie Recommender"
+date:   2017-01-21 15:04:23
+categories: [machine-learning]
+tags: [machine-learning]
+---
 
 # Recommender System Example
 
@@ -120,13 +126,13 @@ y_raw
 
 
 
-The above table is showing us our "database". As we can see, Kitson has yet to watch "Two Lovers" as it is filled with a `NaN`. Our main job is to be able to predict what each of the `NaN`'s should be. 
+The above table is showing us our "database". As we can see, Kitson has yet to watch "Two Lovers" as it is filled with a `NaN`. Our main job is to be able to predict what each of the `NaN`'s should be.
 
 Let's first assume that each user provides us with their list of preferences for movies. Let's first say that Kitson really likes romantic movies and really hates action movies. We can represent this via:
 
 $$\beta_{Kitson} = [4.5, 1]$$
 
-In the equation above, the first number represents, on a scale of 0 to 5, how much Kitson likes romantic movies. Similarily the second number represents how much Kitson likes action movies. 
+In the equation above, the first number represents, on a scale of 0 to 5, how much Kitson likes romantic movies. Similarily the second number represents how much Kitson likes action movies.
 
 Next, let's assume that each movie also has a "genre score" saying how romantic or action packed a movie is. We can do this via:
 
@@ -273,7 +279,7 @@ pd.DataFrame(y_pred)
 
 
 
-In the array shown above, each row corresponds to a specific movie and each column corresponds to a specific user. Concretely, the second row in the array corresponds to the movie "Two Lovers". The second entry in this row corresponds to Kitson's predicted rating of 4.285. 
+In the array shown above, each row corresponds to a specific movie and each column corresponds to a specific user. Concretely, the second row in the array corresponds to the movie "Two Lovers". The second entry in this row corresponds to Kitson's predicted rating of 4.285.
 
 Now that we have predicted ratings for everyone and we can continue making all of our users happy by giving them good recommendations! However, we aren't quite done yet. If you haven't noticed already, there are errors in the array above. Take for example the second column corresponding to Kitson. Our predicted rating for the first movie "Love Everywhere" is 4.1. Howevever, if we look above Kitson actually provided a rating of 5 for this movie:
 
@@ -503,30 +509,30 @@ def compute_error(X_beta, y, rated, reg_coeff, num_features):
     # Get dimensions
     num_users = y.shape[1]
     num_movies = y.shape[0]
-    
+
     # Reconstructing X:
     X = X_beta[0:num_movies*num_features]
     X = X.reshape((num_movies, num_features))
-    
+
     # Reconstructing beta:
     beta = X_beta[num_movies*num_features:]
     beta = beta.reshape((num_users, num_features))
-    
+
     # Calculating estimate:
     y_hat = np.dot(X, beta.T)
-    
+
     # Calculating error:
     error = np.multiply((y_hat - y), rated)
     sq_error = error**2
-    
+
     # Calculating cost:
     beta_regularization = (reg_coeff/2)*(np.sum(beta**2))
     X_regularization = (reg_coeff/2)*(np.sum(X**2))       
     J =  (1/2)*np.sum(np.sum(sq_error)) + beta_regularization + X_regularization
-    
+
     # Calculating gradients:
     beta_gradient = np.dot(error.T,X) + reg_coeff*beta
-    X_gradient = np.dot(error,beta) + reg_coeff*X 
+    X_gradient = np.dot(error,beta) + reg_coeff*X
     X_beta_gradient = np.append(np.ravel(X_gradient), np.ravel(beta_gradient))
 
     return(J, X_beta_gradient)
@@ -538,17 +544,17 @@ Though quite intimidating, the function `compute_error` above is quite simple. I
 The other output `X_beta_gradient` is the gradient of cost. In order to find the minimum of cost, we must take the derivative of cost with respective to $x$ and $\beta$ separatley. `X_beta_gradient` can be thought of as the derivative of the cost function. For those who are interested in this, please [click here](https://en.wikipedia.org/wiki/Gradient_descent)
 
 #### Inputs of  `compute_error`:
-`X_beta` value is the genre-score and user preference arrays unrolled into a single vector array. This will be made more clear later. 
+`X_beta` value is the genre-score and user preference arrays unrolled into a single vector array. This will be made more clear later.
 
 `y` is matrix containing the ratings of each movie from each user.
 
 `rated` is a boolean form of `y` showing whether or not a user has provided a rating for a specific movie
 
-`reg_coeff` is the regularization constant. I will not be disussing this in this blog post as we are going to be setting this to zero. 
+`reg_coeff` is the regularization constant. I will not be disussing this in this blog post as we are going to be setting this to zero.
 
 `num_features` are the number of different features/genre scores we want associated with each movie. In the example done above, we only used two - romance and action. This can be any number of your choosing.
 
-#### Magic Machine Learning Stuff: 
+#### Magic Machine Learning Stuff:
 
 Remember before when I made the assumptions that we knew $x$ and $\beta$? Well now let's do away with those assumptions. Let's just make $x$ and $\beta$ totally random and see if our algorithm can find optimal values for them.
 
@@ -593,7 +599,7 @@ beta
 
 
 
-Now that the values for $x$ and $\beta$ are totally random ones. Let's now make the inputs that required to use `compute_cost`: 
+Now that the values for $x$ and $\beta$ are totally random ones. Let's now make the inputs that required to use `compute_cost`:
 
 
 ```python
@@ -728,9 +734,9 @@ J
 
 The above is showing us that for our initial values of $x$ and $\beta$ we have an "error" of 154. Are there different values of $x$ and $\beta$ that will have less error? Of course there are! We just used random ones to start off with.
 
-Next, we will be determining the values of $x$ and $\beta$ that will minimize the "error" by using scipy's [`minimize`](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.minimize.html) function combined with our `compute_error` function. 
+Next, we will be determining the values of $x$ and $\beta$ that will minimize the "error" by using scipy's [`minimize`](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.minimize.html) function combined with our `compute_error` function.
 
-First however, we are going to center/normalize our ratings for each movie by subtracting the mean rating for each movie. By doing this, each movie will have a mean rating centered at zero. Although the reason why we do this is not that important or covered in this post, briefly, it is done so that we obtain reasonable results for users who have not yet rated anything. 
+First however, we are going to center/normalize our ratings for each movie by subtracting the mean rating for each movie. By doing this, each movie will have a mean rating centered at zero. Although the reason why we do this is not that important or covered in this post, briefly, it is done so that we obtain reasonable results for users who have not yet rated anything.
 
 
 ```python
@@ -833,7 +839,7 @@ Now, we can use the `minimize` function in order to find the values of $x$ and $
 
 ```python
 min_results = minimize(fun=compute_error,
-                       x0=X_beta, 
+                       x0=X_beta,
                        method='CG',         
                        jac=True,
                        args=(y_norm, rated, reg_coeff, num_features),
@@ -963,11 +969,11 @@ y_pred_df
 
 
 
-The table above is showing us the predicted ratings for each user. 
+The table above is showing us the predicted ratings for each user.
 
 ## Discussion:
 
-Let's compare the predicted ratings above with the raw input ratings that we've recieved from the users 
+Let's compare the predicted ratings above with the raw input ratings that we've recieved from the users
 
 
 ```python
@@ -1068,12 +1074,12 @@ y_raw
 
 
 
-If we only look at the raw data and focus on Kitson's ratings, we can guess that he really likes romantic movies and does not like action movies. These preferences are reflected in the array containing the predicted ratings. We have predicted that he would give the movie "Two Lovers" a high rating while giving a movie like "Guns and Karate" a low rating. 
+If we only look at the raw data and focus on Kitson's ratings, we can guess that he really likes romantic movies and does not like action movies. These preferences are reflected in the array containing the predicted ratings. We have predicted that he would give the movie "Two Lovers" a high rating while giving a movie like "Guns and Karate" a low rating.
 
 #### More machine learning magic:
 
-Something awesome has happened. At no point in time did we tell the algorithm to be trying to make features of genre scores for "Romance" and "Action". The algorithm has seemed to do this automatically. The algorithm has "learned" its own features by finding patterns in the dataset. As a concrete example, the algorithm essentially "notices" that users that have enjoyed "Love Everywhere" and "Love Always" tend to also enjoy "Two Lovers". From this, the algorithm adjusts the parameters in $x$ to reflect that these three movie are similar. 
+Something awesome has happened. At no point in time did we tell the algorithm to be trying to make features of genre scores for "Romance" and "Action". The algorithm has seemed to do this automatically. The algorithm has "learned" its own features by finding patterns in the dataset. As a concrete example, the algorithm essentially "notices" that users that have enjoyed "Love Everywhere" and "Love Always" tend to also enjoy "Two Lovers". From this, the algorithm adjusts the parameters in $x$ to reflect that these three movie are similar.
 
-Extending this logic, we can give this algorithm a very large database of movies and tell it to learn 20 features instead of just having two of "Romance" and "Action". In fact, these features may have nothing to do with genres at all. The algorithm could find that people who like actor "George Clooney" always rate his movies very highly and it would have this as a feature if it is what minimizes the cost most effectively. 
+Extending this logic, we can give this algorithm a very large database of movies and tell it to learn 20 features instead of just having two of "Romance" and "Action". In fact, these features may have nothing to do with genres at all. The algorithm could find that people who like actor "George Clooney" always rate his movies very highly and it would have this as a feature if it is what minimizes the cost most effectively.
 
-This concludes this blog posts. In future blog posts, I plan on taking this algorithm and apply it to a real movie dataset. 
+This concludes this blog posts. In future blog posts, I plan on taking this algorithm and apply it to a real movie dataset.
