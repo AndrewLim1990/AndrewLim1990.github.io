@@ -5,8 +5,6 @@ categories: [machine-learning]
 tags: [machine-learning]
 ---
 
-# Recommender System Example
-
 In this blog post, I will be going through a toy example of how to make a recommendation system using a machine learning algorithm called a collaborative filtering algorithm.
 
 This blog post has been adapted from a lab exercise from the Standford Machine Learning course on coursera found [here](https://www.coursera.org/learn/machine-learning)
