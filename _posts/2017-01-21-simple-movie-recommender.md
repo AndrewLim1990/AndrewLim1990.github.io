@@ -543,7 +543,7 @@ def compute_error(X_beta, y, rated, reg_coeff, num_features):
 ```
 
 #### Outputs of  `compute_error`:
-Though quite intimidating, the function `compute_error` above is quite simple. Its main purpose is to compute `J` which is called the "cost". The "cost" is the thing that we are trying to minimize. "Cost" is pretty much the same thing as squared error and for the sake of this post, we can just think of "cost" and "squared error" to be the same thing.
+Though seemingly intimidating, the function `compute_error` above is quite simple. Its main purpose is to compute `J` which is called the "cost". The "cost" is the thing that we are trying to minimize. "Cost" is pretty much the same thing as squared error and for the sake of this post, we can just think of "cost" and "squared error" to be the same thing.
 
 The other output `X_beta_gradient` is the gradient of cost. In order to find the minimum of cost, we must take the derivative of cost with respective to `x` and `beta` separatley. `X_beta_gradient` can be thought of as the derivative of the cost function. For those who are interested in this, please [click here](https://en.wikipedia.org/wiki/Gradient_descent)
 
@@ -560,7 +560,7 @@ The other output `X_beta_gradient` is the gradient of cost. In order to find the
 
 #### Magic Machine Learning Stuff:
 
-Remember before when I made the assumptions that we knew `x` and `beta`? Well now let's do away with those assumptions. Let's just make `x` and `beta` totally random and see if our algorithm can find optimal values for them.
+Remember when I made the assumptions that we knew `x` and `beta`? Well now let's do away with those assumptions. Let's just make `x` and `beta` totally random and see if our algorithm can find optimal values for them.
 
 
 ```python
