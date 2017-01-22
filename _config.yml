@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en"
-title                    : "Andrew Lim"
+title                    : "Home"
 title_separator          : "-"
 name                     : "Andrew Lim"
 description              : "Data Science"
