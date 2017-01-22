@@ -14,7 +14,7 @@ description              : "Data Science"
 url                      : #"https://github.com/AndrewLim1990/"
 baseurl                  : #"/"
 repository               : andrewlim1990/AndrewLim1990.github.io
-teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+teaser                   : "/assets/images/tiger.jpg" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
