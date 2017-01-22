@@ -46,6 +46,8 @@ staticman:
         format           : "iso8601" # "iso8601" (default), "timestamp-seconds", "timestamp-milliseconds"
 atom_feed:
   path                   : # blank (default) uses feed.xml
+header:
+  image: /assets/images/tiger.jpg
 
 # SEO Related
 google_site_verification :
@@ -55,7 +57,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               :
+  username               : "noLIMbs1990"
 facebook:
   username               :
   app_id                 :

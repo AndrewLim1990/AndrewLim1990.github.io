@@ -3,7 +3,6 @@ title:  "Movie Recommender"
 date:   2017-01-21 15:04:23
 categories: [machine-learning]
 tags: [machine-learning]
-layout: splash
 header:
   image: /assets/images/tiger.jpg
 ---
