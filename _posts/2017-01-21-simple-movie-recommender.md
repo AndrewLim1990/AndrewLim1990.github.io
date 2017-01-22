@@ -5,6 +5,7 @@ categories: [machine-learning]
 tags: [machine-learning]
 header:
   image: /assets/images/tiger.jpg
+  caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 ---
 
 
