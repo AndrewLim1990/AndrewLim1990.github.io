@@ -1,5 +1,5 @@
 ---
-title:  "Movie Recommender"
+title:  "Recommending Movies with Machine Learning"
 date:   2017-01-21 15:04:23
 categories: [machine-learning]
 tags: [machine-learning]
@@ -11,6 +11,8 @@ header:
 In this blog post, I'll be going through a toy example of how to make a recommendation system using a collaborative filtering algorithm.
 
 This blog post has been adapted from a lab exercise from the Stanford Machine Learning course on Coursera found [here](https://www.coursera.org/learn/machine-learning)
+
+All code and data can be found in [this github repository](https://github.com/AndrewLim1990/recommender_post)
 
 ## Problem Formulation:
 
