@@ -11,7 +11,7 @@ title                    : "Home"
 title_separator          : "-"
 name                     : "Andrew Lim"
 description              : "Data Science"
-url                      : #"https://github.com/AndrewLim1990/AndrewLim1990.github.io"
+url                      : "https://github.com/AndrewLim1990/"
 baseurl                  : #"/"
 repository               : andrewlim1990/AndrewLim1990.github.io
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -27,7 +27,7 @@ comments:
     # https://developers.facebook.com/docs/plugins/comments
     appid                :
     num_posts            : # 5 (default)
-    colorscheme          : # "light" (default), "dark"
+    colorscheme          : "dark" # "light" (default), "dark"
 staticman:
   allowedFields          : ['name', 'email', 'url', 'message']
   branch                 : "master"
@@ -81,7 +81,7 @@ analytics:
 author:
   name             : "Andrew Lim"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am a Data Scientist"
+  bio              : "Data Science Graduate Student"
   location         : "Vancouver"
   email            : "andrewlim90@gmail.com"
   uri              :
@@ -96,13 +96,13 @@ author:
   keybase          :
   instagram        :
   lastfm           :
-  linkedin         :
+  linkedin         : "andrewlim1990"
   pinterest        :
   soundcloud       :
   stackoverflow    : # "123456/username" (the last part of your profile url, e.g. http://stackoverflow.com/users/123456/username)
   steam            :
   tumblr           :
-  twitter          :
+  twitter          : "noLIMbs1990"
   vine             :
   weibo            :
   xing             :
