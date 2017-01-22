@@ -1,4 +1,5 @@
 # Site settings
+theme: minimal-mistakes-jekyll
 title: Andrew Lim
 description: 'Data Scientist'
 url: 'https://github.com/AndrewLim1990/AndrewLim1990.github.io'
