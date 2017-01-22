@@ -603,7 +603,7 @@ beta
 
 
 
-Now that the values for `x` and `beta` are totally random ones. Let's now make the inputs that required to use `compute_cost`:
+Now that the values for `x` and `beta` are totally random ones. Let's now make the inputs that are required to use `compute_cost`:
 
 
 ```python
