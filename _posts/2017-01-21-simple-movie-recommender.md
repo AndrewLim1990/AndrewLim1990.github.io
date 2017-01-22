@@ -1086,4 +1086,4 @@ Something awesome has happened. At no point in time did we tell the algorithm to
 
 Extending this logic, we can give this algorithm a very large database of movies and tell it to learn 20 features instead of just having two of "Romance" and "Action". In fact, these features may have nothing to do with genres at all. The algorithm could find that people who like actor "George Clooney" always rate his movies very highly and it would have this as a feature if it is what minimizes the cost most effectively.
 
-This concludes this blog posts. In future blog posts, I plan on taking this algorithm and apply it to a real movie dataset.
+This concludes this blog post. In future posts, I plan on taking this algorithm and applying it to a real movie dataset.
