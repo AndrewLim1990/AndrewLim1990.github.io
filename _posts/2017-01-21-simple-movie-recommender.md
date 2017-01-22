@@ -8,13 +8,13 @@ header:
 ---
 
 
-In this blog post, I will be going through a toy example of how to make a recommendation system using a machine learning algorithm called a collaborative filtering algorithm.
+In this blog post, I'll be going through a toy example of how to make a recommendation system using a collaborative filtering algorithm.
 
-This blog post has been adapted from a lab exercise from the Standford Machine Learning course on coursera found [here](https://www.coursera.org/learn/machine-learning)
+This blog post has been adapted from a lab exercise from the Stanford Machine Learning course on Coursera found [here](https://www.coursera.org/learn/machine-learning)
 
 ## Problem Formulation:
 
-As motivation for this problem, let's pretend that we working for Netflix and we want to be able to predict how user, Kitson, would rate a movie "Two Lovers". One way of doing this is looking at Kitson's past ratings for movies similar to "Two Lovers" and check if he had given them a high rating. If he has, we can guess that he would also give a high rating for "Two Lovers". Additionally, we can use the data from other users to see if those with the same preferences as Kitson had also rated the movie highly. If they have, this is further evidence that Kitson would rate the movie highly. Using these two pieces of information, we can take "Two Lovers" and put it on Kitson's movie feed when he logs in causing him to be happy and want to continue our service!
+As motivation for this problem, let's pretend that we work for Netflix and want to be able to predict how a user, Kitson, would rate a movie "Two Lovers". One way of doing this is looking at Kitson's past ratings for movies similar to "Two Lovers" and check if he had given them a high rating. If he has, we can guess that he would also give a high rating for "Two Lovers". Additionally, we can use the data from other users to see if those with the same preferences as Kitson had also rated the movie highly. If they have, this is further evidence that Kitson would rate the movie highly. Using these two pieces of information, we can take "Two Lovers" and put it on Kitson's movie feed when he logs in causing him to be happy and want to continue our service!
 
 Let's explore this problem with an example:
 
