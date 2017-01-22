@@ -11,8 +11,8 @@ title                    : "Andrew Lim"
 title_separator          : "-"
 name                     : "Andrew Lim"
 description              : "Data Science"
-url                      : "https://AndrewLim1990.github.io"
-baseurl                  : "/blog"
+url                      : "https://github.com/AndrewLim1990/AndrewLim1990.github.io"
+baseurl                  : #"/"
 repository               : andrewlim1990/AndrewLim1990.github.io
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 # breadcrumbs            : false # true, false (default)
