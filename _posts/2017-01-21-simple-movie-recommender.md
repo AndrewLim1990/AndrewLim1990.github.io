@@ -736,7 +736,7 @@ J
 
 
 
-The above is showing us that for our initial values of `x` and `beta` we have an "error" of 154. Are there different values of `x` and `beta` that will have less error? Of course there are! We just used random ones to start off with.
+The above is showing us that for our initial values of `x` and `beta` we have an "error" of 160. Are there different values of `x` and `beta` that will have less error? Of course there are! We just used random ones to start off with.
 
 Next, we will be determining the values of `x` and `beta` that will minimize the "error" by using scipy's [`minimize`](https://docs.scipy.org/doc/scipy-0.18.1/reference/generated/scipy.optimize.minimize.html) function combined with our `compute_error` function.
 
