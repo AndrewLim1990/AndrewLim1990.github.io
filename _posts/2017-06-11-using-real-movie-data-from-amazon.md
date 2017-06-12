@@ -1,6 +1,4 @@
 
-# Using Real Movie Data from Amazon
-
 In this blog post, I will be explore the use of a collaborative filtering algorithm on a real movie dataset.
 
 ### Problem Description:
