@@ -391,7 +391,7 @@ plt.show()
 ```
 
 
-![png](output_32_0.png)
+![png]({{ site.url }}{{ site.baseurl }}/assets/images/movie_plot_1.png)
 
 
 Interesting, when using 2 latent-features we seem to have movies that form a circular shape! I am not sure why, but it looks interesting! Now, let's try to cluster them together to see which movies are most similar to each other:
@@ -408,7 +408,7 @@ plt.show()
 ```
 
 
-![png](output_34_0.png)
+![png]({{ site.url }}{{ site.baseurl }}/assets/images/movie_plot_2.png)
 
 
 Looks like a sprinkled donut. It would be nice to see concrete movie titles associated with each of these groups. This is done below:
