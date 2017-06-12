@@ -1,5 +1,5 @@
 
-In this blog post, I will be explore the use of a collaborative filtering algorithm on a real movie dataset.
+In this blog post, I will explore the use of a collaborative filtering algorithm on a real movie dataset.
 
 ### Problem Description:
 
@@ -41,18 +41,18 @@ MIN_NUM_REVIEWS_PERSON = 10
 df = feather.read_dataframe("../results/movie_df.feather")
 ```
 
-The wrangling done below will only get movies that have reviewed a minimum amount of times. Additionally, only users that have rated a minimum amount of movies will be selected. This was mostly done because if I hadn't, I would often get a lot of obscure movie titles that I haven't heard of before. 
+The wrangling done below will only get movies that have reviewed a minimum amount of times. Additionally, only users that have rated a minimum amount of movies will be selected. This was mostly done because if I hadn't, I would often get a lot of obscure movie titles that I haven't heard of before.
 
 
 ```python
-# Find number of reviewers per movie and 
+# Find number of reviewers per movie and
 # the number of movies reviewed by each person
 n_reviews_movie_df = df.groupby('asin').reviewer_id.nunique()
 n_reviews_person_df = df.groupby('reviewer_id').asin.nunique()
 
 # Get list of movies that have been reviewed
-# more than MIN_NUM_REVIEWS_MOVIE times and 
-# users that have reviewed more than 
+# more than MIN_NUM_REVIEWS_MOVIE times and
+# users that have reviewed more than
 # MIN_NUM_REVIEWS_PERSON
 popular_movies = list(n_reviews_movie_df[n_reviews_movie_df > MIN_NUM_REVIEWS_MOVIE].index)
 critical_people = list(n_reviews_person_df[n_reviews_person_df > MIN_NUM_REVIEWS_PERSON].index)
@@ -137,14 +137,14 @@ popular_df.head()
 
 
 
-Great! We now have a nice little dataframe. It's nice to see that VHS seems to be alive and kicking. 
+Great! We now have a nice little dataframe. It's nice to see that VHS seems to be alive and kicking.
 
 
 ```python
 # Reduce size of dataset (REMOVE LATER):
 # The main issue occurs below during gradient descent.
 # np.dot() takes a long time. Perhaps I can use PySpark's
-# dot product. 
+# dot product.
 popular_df = popular_df.head(NUM_OF_REVIEWS)
 ```
 
@@ -170,7 +170,7 @@ print("There are", n_products, "products reviewed")
 
 Great, we have reviewers and movies. FYI, the reason why I am saying "product" in my code is because I was previously using other amazon product data sets available [here](http://jmcauley.ucsd.edu/data/amazon/).
 
-Next, we are working to construct a matrix where each row is a reviewer and each column is a movie. I initially construct it as a sparse array, which I think is the correct thing to do. Unfortunately, later I simply work with it as a normal dense array. If I were to repeat this exercise, I would have liked to continue to work with it as a sparse matrix. 
+Next, we are working to construct a matrix where each row is a reviewer and each column is a movie. I initially construct it as a sparse array, which I think is the correct thing to do. Unfortunately, later I simply work with it as a normal dense array. If I were to repeat this exercise, I would have liked to continue to work with it as a sparse matrix.
 
 
 ```python
@@ -235,9 +235,9 @@ num_latent_features = 2
 X_array = X.toarray()
 ```
 
-The code below uses gradient descent to learn the correct values for `U` and `V`. `U` can be thought as an array where each row is associated with a specific person and each column represents some sort of learned preference of theirs. These learned preferences are the number of latent features. `V` can be thought of as an array where each column is associated with a specific movie and the rows are the learned quality of the movie. This learned quality of the movie corresponds to the learned preference of the movie. 
+The code below uses gradient descent to learn the correct values for `U` and `V`. `U` can be thought as an array where each row is associated with a specific person and each column represents some sort of learned preference of theirs. These learned preferences are the number of latent features. `V` can be thought of as an array where each column is associated with a specific movie and the rows are the learned quality of the movie. This learned quality of the movie corresponds to the learned preference of the movie.
 
-For example, let's first assume that one of "learned preference" happend to be a preference towards scary movies. The "learned quality" of the movie would be how scary the movie was. This is further explained in my last blog post. 
+For example, let's first assume that one of "learned preference" happend to be a preference towards scary movies. The "learned quality" of the movie would be how scary the movie was. This is further explained in my last blog post.
 
 As an additional note, I am performing gradient descent a little differently than I had in my previous blog post. Essentially, these are both the same.
 
@@ -251,31 +251,31 @@ V = np.random.randn(num_latent_features, n_products) * 1e-5
 for i in range(n_iters):
     # Obtain predictions:
     X_hat = np.dot(U, V)     
-    
+
     if np.isnan(X_hat[person_of_interest, product_of_interest]):
         print("ERROR")
         break
-        
+
     # Obtain residual
     resid = X_hat - X_array
     resid[np.isnan(resid)] = 0
-    
+
     # Calculate gradients:
-    dU = np.dot(resid, V.T) 
+    dU = np.dot(resid, V.T)
     dV = np.dot(U.T, resid)
-    
+
     # Update values:
     U = U - dU*alpha
     V = V - dV*alpha
-    
+
     # Output every 10% to make sure on the right track:
     if (i%(n_iters/10) == 0):
-        print("Iteration:", i, 
-              "   Cost:", np.sum(resid**2), 
+        print("Iteration:", i,
+              "   Cost:", np.sum(resid**2),
               "   Rating of interest:", X_hat[person_of_interest, product_of_interest])
-    
+
 X_pred = np.dot(U, V)
-    
+
 ```
 
     Iteration: 0    Cost: 93360.0000001    Rating of interest: 1.90893973813e-10
@@ -324,29 +324,29 @@ V = np.random.randn(num_latent_features, n_products) * 1e-5
 for i in range(n_iters):        
     # Obtain predictions:
     X_hat = np.dot(U, V)     
-    
+
     if np.isnan(X_hat[person_of_interest, product_of_interest]):
         print("ERROR")
         break
-        
+
     # Obtain residual
     resid = X_hat - X_array
     resid[np.isnan(resid)] = 0
-    
+
     # Calculate gradients:
-    dU = np.dot(resid, V.T) 
+    dU = np.dot(resid, V.T)
     dV = np.dot(U.T, resid)
-    
+
     # Update values:
     U = U - dU*alpha
     V = V - dV*alpha
-    
+
     # Output every 10% to make sure on the right track:
     if (i%(n_iters/10) == 0):
-        print("Iteration:", i, 
-              "   Cost:", np.sum(resid**2), 
+        print("Iteration:", i,
+              "   Cost:", np.sum(resid**2),
               "   Rating of interest:", X_hat[person_of_interest, product_of_interest])
-    
+
 # Make prediction:
 X_pred = np.dot(U, V)
 
@@ -599,13 +599,13 @@ I really have no idea as to what is occurring in this group
 
 ### Closing Notes:
 
-Unfortunately, these groups don't seem to make immediate sense. Honestly, the trends within groups that seem to be present are probably by luck. It would be nice to see groups of movies that had an obvious theme going on such as genre or time when released. Perhaps in the future, we can make better groups if we use more latent features (we used 2 in this case). 
+Unfortunately, these groups don't seem to make immediate sense. Honestly, the trends within groups that seem to be present are probably by luck. It would be nice to see groups of movies that had an obvious theme going on such as genre or time when released. Perhaps in the future, we can make better groups if we use more latent features (we used 2 in this case).
 
 In future blog posts I plan to:
 * Scale up to use more data
 * Create a twitter bot that may be able to identify which movies are trending on social media
-    * This can be used to promote movies that are trending to people that we predicted would give it a high rating. 
-    * The same idea can be applied to Amazon's "Toys and Games" data set. My thought that it would be able to promote something like a fidget spinner to people which seems to be all the rage now a days. 
-* Create better models be adding more features to our dataset. This can easily be done by altering our gradient descent loop. 
+    * This can be used to promote movies that are trending to people that we predicted would give it a high rating.
+    * The same idea can be applied to Amazon's "Toys and Games" data set. My thought that it would be able to promote something like a fidget spinner to people which seems to be all the rage now a days.
+* Create better models be adding more features to our dataset. This can easily be done by altering our gradient descent loop.
 
 Please let me know if you have any other cool ideas/questions/suggestions/**found mistakes**! My e-mail is andrewlim90@gmail.com
