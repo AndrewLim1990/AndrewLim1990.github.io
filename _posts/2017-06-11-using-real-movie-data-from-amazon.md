@@ -590,7 +590,7 @@ plt.show()
 ```
 
 
-![png](output_33_0.png)
+![png]({{ site.url }}{{ site.baseurl }}/assets/images/movie_plot_3.png)
 
 
 Interesting, when using 2 latent-features, this is how the movies are being distributed. Let's try to use k-means clustering:
