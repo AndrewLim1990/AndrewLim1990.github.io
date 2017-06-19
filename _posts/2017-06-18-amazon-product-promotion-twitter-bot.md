@@ -1,3 +1,4 @@
+
 This blog post will follow my progress on making a twitter bot to try and obtain movie titles that are "hot" or "trending" on social media in order to identify **Amazon products that can be promoted** to customers.
 
 In the spirit of full disclosure, this blog post was fully inspired by [this Amazon job posting](https://www.amazon.jobs/en/jobs/515195)
@@ -219,7 +220,7 @@ for(word in result_df[5,]$words[[1]]){
     ## [1] " big batman week re ranking caped crusader s movies worst best tomatometer "
     ## [2] " movies jaden smith made brilliantly awful batman music vide "
 
-There we go! Batman once again pulls through for us. Sadly, this was the week Adam West passed away so I think people were tweeting Batman related stuff. Perhaps to celebrate his life and his accomplishments, Amazon could have a Batman promotion!
+There we go! Batman once again pulls through for us. Now, because we know Batman is being talked about on social media, we can identify individuals that we've predicted to give "Batman - The Movie \[VHS\]" a high rating and send them promotional material. Sadly, this was the week Adam West passed away so I think people were tweeting Batman related stuff.
 
 Closing Notes / To Do:
 ----------------------
