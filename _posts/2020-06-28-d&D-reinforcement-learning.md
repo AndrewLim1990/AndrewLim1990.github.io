@@ -49,11 +49,11 @@ In order to first allow for learning in a simple environment, the combat takes p
     * Initial coordinates: (5, 10)
     
 Each combatant, along with the attacks listed above, is allowed the following actions:
-    * MoveLeft: move left 5ft
-    * MoveRight: move right 5ft
-    * MoveDown: move down 5ft
-    * MoveUp: move up 5ft
-    * EndTurn: ends turn
+* MoveLeft: move left 5ft
+* MoveRight: move right 5ft
+* MoveDown: move down 5ft
+* MoveUp: move up 5ft
+* EndTurn: ends turn
     
 Additionally, a "time limit" of 1500 actions was implemented. In other words, agents were permitted to take a maximum of 1500 actions within a single combat encounter. 
 
