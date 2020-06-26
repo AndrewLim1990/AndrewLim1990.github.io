@@ -16,7 +16,8 @@ This post is a first in a series of posts of applying machine learning to dungeo
  * Applying NLP to the story telling aspect of D&D:
      * Summarization of Critical Role episodes
      * Question and answering of events within a Critical Role episode
-
+     
+The code associated with this blog post can be seen [in this github repo](https://github.com/AndrewLim1990/dungeonsNdata).
 
 ## Combat Scenario Description
 
