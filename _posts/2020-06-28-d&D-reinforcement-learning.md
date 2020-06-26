@@ -88,7 +88,7 @@ Additionally, a reward of `5` was given if `Leotris` was the winner. Otherwise, 
 
 Below are the result of both `Strahd` and `Leotris` using actions at random.
 
-![](results/random.png)
+![](/assets/images/random.png)
 
 The above was used to evaluate whether goal 1 had been achieved.
 
@@ -96,13 +96,13 @@ The above was used to evaluate whether goal 1 had been achieved.
 
 When I initially implemented a dueling double deep Q network, the follow results were achieved:
 
-![dddqn_results](results/double_dueling_DQN_high_alpha.png)
+![dddqn_results](/assets/images/double_dueling_DQN_high_alpha.png)
 
 Similar results as the above were observed for a vanilla DQN, and a double DQN. Although these results did not show evidence that a reasonable strategy had been learned, the agent began to exhibit improved performance with a couple key adjustments.
 
 The first important adjustment was optimizing the learning rate $\alpha$. I started to see a reasonable strategy being learned if $\alpha$ was tuned correctly. The problem was that the learning rate was initially too large and the agent could not learn how to "escape" areas of suboptimal strategies within the parameter space.
 
-![damage_reward_results](results/damage_reward_dddqn.png)
+![damage_reward_results](/assets/images/damage_reward_dddqn.png)
 
 Another adjustment that had to be made was to the linear decay of the $\epsilon$-greedy exploration strategy. The $\epsilon$-greedy strategy was implemented such that the agent started with an $\epsilon$ exploration probability of 90% which decayed linearly to 5% over 50,000 actions. That is to say, at the beginning stages of exploration, the agent would take the action believed to be optimal 10% of the time. The remaining 90% of the time, the agent would "explore" by taking a random action. The $\epsilon$ value would decay linearly down to a 5% probability of taking a random action and a 95% probability of taking an action believed to be optimal. 
 
@@ -116,17 +116,17 @@ Here are the biggest problems/obstacles I had to contend with and the steps I to
 
 Once the above were addressed, the agent was able to learn a reasonable strategy which exhibited the following results:
 
-![dddqn_results](results/double_dueling_DQN.png)
+![dddqn_results](/assets/images/double_dueling_DQN.png)
 
 ### Proximal Policy Iteration (PPO)
 
 A simple implementation of [PPO](https://arxiv.org/abs/1707.06347) managed also managed to learn a reasonable strategy:
 
-![](results/PPO.png)
+![](/assets/images/PPO.png)
 
 I believe that there were a couple contributing factors in obtaining these results. Again it was vital that the learning rate be sufficiently small ($\alpha$=1e-5). With a larger learning rate of ($\alpha$=1e-3), the following results were observed:
 
-![](results/PPO_high_alpha.png)
+![](/assets/images/PPO_high_alpha.png)
 
 In the case depicted above, the agent seems to have gotten into a parameter space in which it could not recover from
 
@@ -142,8 +142,3 @@ Here are some top things I took away from this project:
 3. Implement algorithms in small and simple scenarios. This helps immensely with tracking down bugs and speeding up the speed at which you can iterate.
 4. It's a good idea to make your solution fast and scalable. This is an area I neglected and the main source of frustration for me. Operating on a slow iteration cycle was painful with instances where I would be waiting days for the agent to learn a reasonable strategy only to find out there was a bug somewhere or that I wanted to adjust a hyperparameter. If I had made my solution more scalable, I could have cut down on the time waiting around.
 5. Don't let perfection get in the way of progress. Is my code a piece of crap? Yes. Did I learn a lot by doing this? Yes x 100. While building, I found it hard to resist the temptation to backtrack in order tooptimize/refactor large portions of code. Rather than get bogged down by this, I opted to push onward just to get a functional solution. In hindsight, I am very glad I opted to do this because there were many other more important and interesting (relevant to RL) problems that arose. 
-
-
-```python
-
-```
