@@ -1,3 +1,13 @@
+---
+title:  "D&D and Reinforcement Learning"
+date:   2020-06-26 15:04:23
+categories: [machine-learning]
+tags: [machine-learning]
+header:
+  image: /assets/images/tiger.jpg
+  caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
+---
+
 # Dungeons and Data
 
 This post is a first in a series of posts of applying machine learning to dungeons and dragons. This blog post details this I've learned from applying reinforcement learning algorithms in a simple [Dungeons and Dragons combat](https://www.youtube.com/watch?v=7tnrATiclg4) scenario. Future blog posts will include:
