@@ -117,7 +117,7 @@ Here are the biggest problems/obstacles I had to contend with and the steps I to
 
 Once the above were addressed, the agent was able to learn a reasonable strategy which exhibited the following results:
 
-![dddqn_results](/assets/images/double_dueling_DQN.png)
+![dddqn_results](/assets/images/double_dueling_DQN2.png)
 
 ### Proximal Policy Iteration (PPO)
 
