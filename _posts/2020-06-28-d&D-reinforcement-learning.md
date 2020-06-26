@@ -49,6 +49,7 @@ In order to first allow for learning in a simple environment, the combat takes p
     * Initial coordinates: (5, 10)
     
 Each combatant, along with the attacks listed above, is allowed the following actions:
+
     * MoveLeft: move left 5ft
     * MoveRight: move right 5ft
     * MoveDown: move down 5ft
