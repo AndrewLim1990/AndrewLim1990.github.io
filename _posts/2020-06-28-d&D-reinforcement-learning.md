@@ -49,7 +49,6 @@ In order to first allow for learning in a simple environment, the combat takes p
     * Initial coordinates: (5, 10)
     
 Each combatant, along with the attacks listed above, is allowed the following actions:
-
     * MoveLeft: move left 5ft
     * MoveRight: move right 5ft
     * MoveDown: move down 5ft
@@ -67,7 +66,7 @@ The scenario was purposefully set up such that Strahd had an obvious advantage. 
 The following are learning goals I envisioned for this project:
 
 * `Leotris` out performs strategy of taking random actions.
-* `Leotris` learns to dealt damage. The challenge with this goal is that the agent must learn that it cannot just repeatedly take the `ShootArrow` action within the same turn. Instead, due to D&D combat rules, the agent must take the `EndTurn` action in between each `ShootArrow` usage if damage is to be done.
+* `Leotris` learns to deal damage. The challenge with this goal is that the agent must learn that it cannot just repeatedly take the `ShootArrow` action within the same turn. Instead, due to D&D combat rules, the agent must take the `EndTurn` action in between each `ShootArrow` usage if damage is to be done.
 * `Leotris` learns to avoid damage. `Leotris` can only take damage from `Strahd` if they are within 5 ft of each other. 
 
 In order to accomplish the above goals, the agent's "state" consists of the following:
