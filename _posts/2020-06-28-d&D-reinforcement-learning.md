@@ -10,20 +10,13 @@ header:
 
 # Dungeons and Data
 
-This post is a first in a series in which I document applying machine learning to the world of dungeons and dragons. In this blog post, I detail what I've learned from applying reinforcement learning algorithms to a simple [Dungeons and Dragons combat](https://www.youtube.com/watch?v=7tnrATiclg4) scenario. Future blog posts will include:
-
- * Applying RL algorithms to more complicated combat scenarios
- * Applying NLP to the story telling aspect of D&D:
-     * Summarization of Critical Role episodes
-     * Question and answering of events within a Critical Role episode
-     
-The code associated with this blog post can be seen [in this github repo](https://github.com/AndrewLim1990/dungeonsNdata).
+This blog post is a first in a series in which I apply machine learning to the world of Dungeons and Dragons. In this blog post, I apply reinforcement learning algorithms to a simple [Dungeons and Dragons combat](https://www.youtube.com/watch?v=7tnrATiclg4) scenario. The code associated with this blog post can be seen [in this github repo](https://github.com/AndrewLim1990/dungeonsNdata).
 
 ## Combat Scenario Description
 
 This section discusses the environment in which combat takes place. 
 
-In order to first allow for learning in a simple environment, the combat takes place in a 50ft x 50ft room and only involves two combatants:
+As a first attempt, reinforcement learning was applied in a simple environment. The combat takes place in a 50ft x 50ft room and only involves two combatants:
 
 1. Leotris:
     * Hit points: 25
@@ -36,7 +29,6 @@ In order to first allow for learning in a simple environment, the combat takes p
         * Damage bonus: +3
     * Initial coordinates: (5, 5)
 
-
 2. Strahd:
     * Hit points: 200
     * Armor class: 16
@@ -48,7 +40,7 @@ In order to first allow for learning in a simple environment, the combat takes p
         * Damage bonus: +10
     * Initial coordinates: (5, 10)
     
-Each combatant, along with the attacks listed above, is allowed the following actions:
+Each combatant, along with the attacks listed above, is allowed to take the following actions:
 * MoveLeft: move left 5ft
 * MoveRight: move right 5ft
 * MoveDown: move down 5ft
@@ -57,13 +49,13 @@ Each combatant, along with the attacks listed above, is allowed the following ac
     
 Additionally, a "time limit" of 1500 actions was implemented. In other words, agents were permitted to take a maximum of 1500 actions within a single combat encounter. 
 
-## Goals and Learning Environment
+## Goals, Learning Environment, and Rewards
 
 For this experiment, `Leotris` was assigned one of the RL algorithms described below while `Strahd` was assigned a `Random` strategy in which actions were chosen at random.
 
 The scenario was purposefully set up such that Strahd had an obvious advantage. However, if Leotris is able learn to keep his distance from Strahd and use his `ShootArrow` attack, he should be able to win a considerable amount of the games.
 
-The following are learning goals I envisioned for this project:
+The following are learning goals I envisioned for `Leotris`:
 
 * `Leotris` out performs strategy of taking random actions.
 * `Leotris` learns to deal damage. The challenge with this goal is that the agent must learn that it cannot just repeatedly take the `ShootArrow` action within the same turn. Instead, due to D&D combat rules, the agent must take the `EndTurn` action in between each `ShootArrow` usage if damage is to be done.
@@ -87,7 +79,7 @@ Additionally, a reward of `5` was given if `Leotris` was the winner. Otherwise, 
 
 ### Random
 
-Below are the result of both `Strahd` and `Leotris` using actions at random.
+The figure below shows the result if both `Strahd` and `Leotris` are selecting actions at random.
 
 ![](/assets/images/random.png)
 
@@ -95,7 +87,7 @@ The above was used to evaluate whether goal 1 had been achieved.
 
 ### Dueling Double Deep Q-Learning Network
 
-The first RL algorithm I implemented was a vanilla DQN. After I had implemented it and did not find immediate success, I opted to add more "bells and whistles" and eventually arrived at a dueling double DQN. Below is a code snippet showing a portion of the dueling double DQN implementation used:
+The first RL algorithm I implemented was a vanilla DQN. However, after implenting it, I did not find immediate success. I then proceeded to add more "bells and whistles" and eventually arrived at a dueling double DQN. Below is a code snippet showing a portion of the dueling double DQN implementation used:
 
 ```
 class DuelingNet(torch.nn.Module):
@@ -138,14 +130,14 @@ Although initial results did not show evidence that a reasonable strategy had be
 
 1. **Reducing Learning rate α**: Perhaps the most important adjustment that had to be made was optimizing the learning rate α. With too large of a learning rate, the agent could not “escape” areas of suboptimal strategies within the parameter space. 
 2. **Reducing ϵ-exploration decay rate**: The linearly decaying ϵ-greedy exploration strategy was implemented such that the agent started with an ϵ-exploration probability of 90% which decayed linearly to 5% over 50,000 actions. That is to say, at the beginning stages of exploration, the agent would take the action believed to be optimal 10% of the time. The remaining 90% of the time, the agent would "explore" by taking a random action. The ϵ-value would decay linearly down to a 5% exploration. This was far too fast of a decay rate and the agent failed to explore enough in order to learn a reasonable strategy.
-3. **Sparse rewards**: By only providing a reward for achieving a victory, the training objective was made more difficult. To address this, rewards were changed such that the agent was rewarded every time it did damage. This helped a great deal with the agent even learning to alter between `ShootArrow` and `EndTurn`. Although this was a great quick fix, I decided to return the reward structure back to the original as I was more interested in a sparser reward setting.
-3. **Catastrophic forgetting**: Looking at [this](https://ai.stackexchange.com/questions/10822/what-is-happening-when-a-reinforcement-learning-agent-trains-itself-out-of-desir) stack exchange post, the user is asking why DQNs sometimes train themselves out of desired behavior. I observed this happening when the agent was able to establish a reasonable strategy at the terminal ϵ-exploration of 5%, but if it was left to train longer, performance would eventually degrade. To combat this, it was suggested to decrease the learning rate and use prioritized experience replay. This seemed to help. Another suggestion was to keep experiences from early stages of exploration within memory. I have not tried this one yet. 
+3. **Making rewards less sparse**: By only providing a reward for achieving a victory, the training objective was made more difficult. To address this, rewards were changed such that the agent was rewarded every time it did damage. This helped a great deal with the agent even learning to alter between `ShootArrow` and `EndTurn`. Although this was a great quick fix, I decided to return the reward structure back to the original as I was more interested in a sparser reward setting.
+3. **Avoiding catastrophic forgetting**: Looking at [this](https://ai.stackexchange.com/questions/10822/what-is-happening-when-a-reinforcement-learning-agent-trains-itself-out-of-desir) stack exchange post, the user is asking why DQNs sometimes train themselves out of desired behavior. I observed this happening when the agent was able to establish a reasonable strategy at the terminal ϵ-exploration of 5%, but if it was left to train longer, performance would eventually degrade. To combat this, it was suggested to decrease the learning rate and use prioritized experience replay. This seemed to help. Another suggestion was to keep experiences from early stages of exploration within memory. I have not tried this one yet. 
 
 Once the above were adjusted, the agent was able to learn a reasonable strategy which exhibited the following results:
 
 ![dddqn_results](/assets/images/double_dueling_DQN2.png)
 
-(I cannot stress how happy I was to see these results. Although the scenario was relatively simplisitic and seemingly not difficult, after countless attempts of failed agents, this was this a sight for sore eyes.)
+(I cannot stress how happy I was to see these results. Although the scenario was relatively simplisitic and seemingly not difficult, after countless attempts of failed agents, this was a sight for extremely sore eyes.)
 
 ### Proximal Policy Iteration (PPO)
 
@@ -202,22 +194,27 @@ I believe that there were a couple contributing factors in obtaining these resul
 
 Similar to the dueling double DQN, the PPO agent seems to have gotten into a parameter space in which it could not recover from if α was too large.
 
-I found that the PPO agent was not as sensitive to hyper parameter tuning and worked better out of the box. Perhaps the largest contributing factors is the fact that the agent did not use an epsilon greedy like exploration strategy. Instead, PPO agents selects actions stochastically by nature. As a result, agent was less likely to get "stuck" in a bad area because it would naturally revert back to a higher exploration mode.
+I found that the PPO agent was not as sensitive to hyper parameter tuning and worked better out of the box. Perhaps the largest contributing factors is the fact that the agent did not use an epsilon greedy like exploration strategy. Instead, PPO agents select actions stochastically by nature and does not require an explicit exploration strategy. As a result, it was less likely to get "stuck" in a bad area because it would naturally revert back to a higher exploration mode.
 
-Although I was not able achieve as good results as the dueling double DQN, I don't think it that this is indicative of the potential of PPO. I spent a lot more time adjusting hyper parameters and adding bells and whistles for DQNs. I believe if the PPO network was made deeper and the learning rate was properly tuned, it would be able to match the performance of the DQN.
+Although I was not able achieve as high of a win percentage as the dueling double DQN, I don't think it that this is indicative of the potential of PPO. I spent a lot more time adjusting hyper parameters and adding bells and whistles for DQNs. I believe if the PPO network was made deeper and the learning rate was properly tuned, it would be able to match the performance of the DQN.
 
 ## Conclusion
 
 Here are some key takeaways I gained from this project:
-1. Be patient. Reinforcement learning takes a long time. When I first started, I would often stop training an agent prematurely if I hadn't seen early signs of success or saw a dip in performance. However, I later learned that the agents could sometimes overcome this dip and outperform behaviors prior to the dip. 
+1. Be patient. Reinforcement learning takes a long time. When I first started, I would often stop training an agent prematurely if it hadn't shown early signs of success or saw if there was dip in performance. However, I later learned that agents could overcome areas of low performance and even surpass previous performance highs.  
 2. Learning rate is almost always the most imporant hyper parameter.
 3. Implement algorithms in small and simple scenarios first. This helps immensely with debugging and speeding iteration cycles.
 4. It's a good idea to make your solution fast and scalable. This is an area I neglected and a large source of frustration for me. Operating on a slow iteration cycle was painful with instances in which I waited for days for the agent to learn a reasonable strategy only to find out there was a bug or that I wanted to adjust a hyperparameter. If I had made my solution more scalable, I could have cut down on the time waiting around.
 5. Don't let perfection get in the way of progress. Is my code a piece of low quality? Yes. Did I learn a lot by doing this? Yes x 100. While building, I found it hard to resist the temptation to backtrack in order tooptimize/refactor large portions of code. Rather than get bogged down by this, I opted to push onward just to get a functional solution. In hindsight, I am very glad I opted to do this because there were many other more important and interesting (relevant to RL) problems that arose. 
 
-In future work, I want to analyze the behavior or resulting agents more closely in order to see what an optimal strategy would look like. At a quick glance, the agent seemed to have learned to:
- * `ShootArrow` if it had not already taken an attack action
- * `Move` if it had remaining movement
- * `EndTurn` if no movement and attacks remained
+In future work, I want to:
  
- However, I'm not sure how the agent would move. Did it learn to move away from the location of `Strahd` in order to avoid damage? This requires more investigation. 
+ 1. Analyze the behavior of resulting agents more closely in order to observe what an optimal strategy would look like. At a quick glance, the agent seemed to have learned to:
+     * `ShootArrow` if it had not already taken an attack action
+     * `Move` if it had remaining movement
+     * `EndTurn` if no movement and attacks remained
+  However, I'm not sure how the agent `Move`'d. Did it learn to move away from the location of `Strahd` in order to avoid damage? This requires more investigation. 
+ 2. Apply RL algorithms to more complicated combat scenarios
+ 3. Apply NLP to the story telling aspect of D&D:
+     * Summarization of Critical Role episodes
+     * Question and answering of events within a Critical Role episode
