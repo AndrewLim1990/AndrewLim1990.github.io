@@ -136,7 +136,7 @@ Similar results were observed for a vanilla DQN and double DQN. During training,
 
 Although initial results did not show evidence that a reasonable strategy had been learned, the agent began to exhibit improved performance with a some key adjustments:
 
-1. **Learning rate α was too large**: Perhaps the most important adjustment that had to be made was optimizing the learning rate $\alpha$. With a learning rate that is too large, the agent could not learn how to “escape” areas of suboptimal strategies within the parameter space. 
+1. **Learning rate α was too large**: Perhaps the most important adjustment that had to be made was optimizing the learning rate α. With a learning rate that is too large, the agent could not learn how to “escape” areas of suboptimal strategies within the parameter space. 
 2. **ϵ-exploration decay rate was too fast**: The ϵ-greedy exploration strategy was implemented such that the agent started with an ϵ-exploration probability of 90% which decayed linearly to 5% over 50,000 actions. That is to say, at the beginning stages of exploration, the agent would take the action believed to be optimal 10% of the time. The remaining 90% of the time, the agent would "explore" by taking a random action. The ϵ-value would decay linearly down to a 5% exploration. This was far too fast of a decay rate and the agent failed to explore enough in order to learn a reasonable strategy.
 3. **Sparse rewards**: By only providing a reward for achieving a victory, the training objective was made more difficult. To address this, rewards were changed such that the agent was rewarded every time it did damage. This helped a great deal with the agent even learning to alter between `ShootArrow` and `EndTurn`. Although this was a great quick fix, I decided to return the reward structure back to the original as I was more interested in a sparser reward setting.
 3. **Catastrophic forgetting**: Looking at [this](https://ai.stackexchange.com/questions/10822/what-is-happening-when-a-reinforcement-learning-agent-trains-itself-out-of-desir) stack exchange post, the user is asking why DQNs sometimes train themselves out of desired behavior. I observed this when the agent was able to establish a reasonable strategy at the terminal ϵ-exploration of 5%, but if it was left to run long enough, performance would degrade with more training. To combat this, it was suggested to decrease the learning rate and use prioritized experience replay. This seemed to help. Another suggestion was to keep experiences from early stages of exploration within memory. I have not tried this one yet. 
@@ -196,7 +196,7 @@ With the above implementation of PPO a reasonable strategy was learned:
 
 ![](/assets/images/PPO.png)
 
-I believe that there were a couple contributing factors in obtaining these results. Again it was vital that the learning rate be sufficiently small ($\alpha$=1e-5). With a larger learning rate of ($\alpha$=1e-3), the following results were observed:
+I believe that there were a couple contributing factors in obtaining these results. Again it was vital that the learning rate be sufficiently small (α=1e-5). With a larger learning rate of (α=1e-3), the following results were observed:
 
 ![](/assets/images/PPO_high_alpha.png)
 
