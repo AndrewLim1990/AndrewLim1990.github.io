@@ -7,7 +7,7 @@ header:
   overlay_image: /assets/images/tiger.jpg
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 ---
-
+# A Simple Example
 
 In this blog post, I'll be going through a toy example of how to make a recommendation system using a collaborative filtering algorithm.
 
