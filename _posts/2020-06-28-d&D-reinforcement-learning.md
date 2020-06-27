@@ -10,7 +10,7 @@ header:
 
 # Dungeons and Data
 
-This post is a first in a series of posts of applying machine learning to dungeons and dragons. This blog post details this I've learned from applying reinforcement learning algorithms in a simple [Dungeons and Dragons combat](https://www.youtube.com/watch?v=7tnrATiclg4) scenario. Future blog posts will include:
+This post is a first in a series of posts of applying machine learning to dungeons and dragons. This blog post details what I've learned from applying reinforcement learning algorithms in a simple [Dungeons and Dragons combat](https://www.youtube.com/watch?v=7tnrATiclg4) scenario. Future blog posts will include:
 
  * Applying RL algorithms to more complicated combat scenarios
  * Applying NLP to the story telling aspect of D&D:
