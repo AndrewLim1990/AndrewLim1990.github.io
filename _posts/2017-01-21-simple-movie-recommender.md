@@ -4,7 +4,7 @@ date:   2017-01-21 15:04:23
 categories: [machine-learning]
 tags: [machine-learning]
 header:
-  image: /assets/images/tiger.jpg
+  overlay_image: /assets/images/tiger.jpg
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 ---
 
