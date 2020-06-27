@@ -10,7 +10,7 @@ header:
 
 # Dungeons and Data
 
-This post is a first in a series of posts of applying machine learning to dungeons and dragons. This blog post details what I've learned from applying reinforcement learning algorithms in a simple [Dungeons and Dragons combat](https://www.youtube.com/watch?v=7tnrATiclg4) scenario. Future blog posts will include:
+This post is a first in a series in which I document applying machine learning to the world of dungeons and dragons. In this blog post, I detail what I've learned from applying reinforcement learning algorithms to a simple [Dungeons and Dragons combat](https://www.youtube.com/watch?v=7tnrATiclg4) scenario. Future blog posts will include:
 
  * Applying RL algorithms to more complicated combat scenarios
  * Applying NLP to the story telling aspect of D&D:
@@ -81,7 +81,7 @@ In order to accomplish the above goals, the agent's "state" consists of the foll
 8. Remaining movement available this turn
 9. Time limit remaining (as a percentage of the time limit)
 
-Additionally, a reward of `5` was given if `Leotris` was the winner. Otherwise, a reward of `0` was given if `Leotris` had reached the "time limit" (1500 actions) or his hit points were reduced to zero. 
+Additionally, a reward of `5` was given if `Leotris` was the winner. Otherwise, a reward of `0` was given if `Leotris` had reached the "time limit" (1500 actions) or his hit points are reduced to zero. 
 
 ## Results and Discussion
 
@@ -95,7 +95,7 @@ The above was used to evaluate whether goal 1 had been achieved.
 
 ### Dueling Double Deep Q-Learning Network
 
-Here is a snippet of code showing the simple architecture of the dueling double DQN:
+The first RL algorithm I implemented was a vanilla DQN. After I had implemented it and did not find immediate success, I opted to add more "bells and whistles" and eventually arrived at a dueling double DQN. Below is a code snippet showing a portion of the dueling double DQN implementation used:
 
 ```
 class DuelingNet(torch.nn.Module):
@@ -136,16 +136,16 @@ Similar results were observed for a vanilla DQN and double DQN. During training,
 
 Although initial results did not show evidence that a reasonable strategy had been learned, the agent began to exhibit improved performance with a some key adjustments:
 
-1. **Learning rate α was too large**: Perhaps the most important adjustment that had to be made was optimizing the learning rate α. With a learning rate that is too large, the agent could not learn how to “escape” areas of suboptimal strategies within the parameter space. 
-2. **ϵ-exploration decay rate was too fast**: The ϵ-greedy exploration strategy was implemented such that the agent started with an ϵ-exploration probability of 90% which decayed linearly to 5% over 50,000 actions. That is to say, at the beginning stages of exploration, the agent would take the action believed to be optimal 10% of the time. The remaining 90% of the time, the agent would "explore" by taking a random action. The ϵ-value would decay linearly down to a 5% exploration. This was far too fast of a decay rate and the agent failed to explore enough in order to learn a reasonable strategy.
+1. **Reducing Learning rate α**: Perhaps the most important adjustment that had to be made was optimizing the learning rate α. With too large of a learning rate, the agent could not “escape” areas of suboptimal strategies within the parameter space. 
+2. **Reducing ϵ-exploration decay rate**: The linearly decaying ϵ-greedy exploration strategy was implemented such that the agent started with an ϵ-exploration probability of 90% which decayed linearly to 5% over 50,000 actions. That is to say, at the beginning stages of exploration, the agent would take the action believed to be optimal 10% of the time. The remaining 90% of the time, the agent would "explore" by taking a random action. The ϵ-value would decay linearly down to a 5% exploration. This was far too fast of a decay rate and the agent failed to explore enough in order to learn a reasonable strategy.
 3. **Sparse rewards**: By only providing a reward for achieving a victory, the training objective was made more difficult. To address this, rewards were changed such that the agent was rewarded every time it did damage. This helped a great deal with the agent even learning to alter between `ShootArrow` and `EndTurn`. Although this was a great quick fix, I decided to return the reward structure back to the original as I was more interested in a sparser reward setting.
-3. **Catastrophic forgetting**: Looking at [this](https://ai.stackexchange.com/questions/10822/what-is-happening-when-a-reinforcement-learning-agent-trains-itself-out-of-desir) stack exchange post, the user is asking why DQNs sometimes train themselves out of desired behavior. I observed this when the agent was able to establish a reasonable strategy at the terminal ϵ-exploration of 5%, but if it was left to run long enough, performance would degrade with more training. To combat this, it was suggested to decrease the learning rate and use prioritized experience replay. This seemed to help. Another suggestion was to keep experiences from early stages of exploration within memory. I have not tried this one yet. 
+3. **Catastrophic forgetting**: Looking at [this](https://ai.stackexchange.com/questions/10822/what-is-happening-when-a-reinforcement-learning-agent-trains-itself-out-of-desir) stack exchange post, the user is asking why DQNs sometimes train themselves out of desired behavior. I observed this happening when the agent was able to establish a reasonable strategy at the terminal ϵ-exploration of 5%, but if it was left to train longer, performance would eventually degrade. To combat this, it was suggested to decrease the learning rate and use prioritized experience replay. This seemed to help. Another suggestion was to keep experiences from early stages of exploration within memory. I have not tried this one yet. 
 
 Once the above were adjusted, the agent was able to learn a reasonable strategy which exhibited the following results:
 
 ![dddqn_results](/assets/images/double_dueling_DQN2.png)
 
-(I cannot stress how happy I was to see these results. Although the scenario was relatively simplisitic and seemingly not difficult, after countless attempts of failed agents, MAN was this a sight for sore eyes.)
+(I cannot stress how happy I was to see these results. Although the scenario was relatively simplisitic and seemingly not difficult, after countless attempts of failed agents, this was this a sight for sore eyes.)
 
 ### Proximal Policy Iteration (PPO)
 
@@ -208,8 +208,8 @@ Although I was not able achieve as good results as the dueling double DQN, I don
 
 ## Conclusion
 
-Here are the top lessons I took away from this project:
-1. Be patient. Reinforcement learning takes a long time.
+Here are some key takeaways I gained from this project:
+1. Be patient. Reinforcement learning takes a long time. When I first started, I would often stop training an agent prematurely if I hadn't seen early signs of success or saw a dip in performance. However, I later learned that the agents could sometimes overcome this dip and outperform behaviors prior to the dip. 
 2. Learning rate is almost always the most imporant hyper parameter.
 3. Implement algorithms in small and simple scenarios first. This helps immensely with debugging and speeding iteration cycles.
 4. It's a good idea to make your solution fast and scalable. This is an area I neglected and a large source of frustration for me. Operating on a slow iteration cycle was painful with instances in which I waited for days for the agent to learn a reasonable strategy only to find out there was a bug or that I wanted to adjust a hyperparameter. If I had made my solution more scalable, I could have cut down on the time waiting around.
