@@ -7,6 +7,7 @@ header:
   overlay_image: /assets/images/books.jpg
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 ---
+# Natural Language Processing Summarization: Extraction
 
 ## Introduction
 In this post, I will be going over an automatic text summarization approach that I've implemented heavily based off of [this research paper by Chen and Bansal](https://www.aclweb.org/anthology/P18-1063/). Text summarization is a natural language processing task of taking long form documents and condensing them in two or three sentences. Following the approach from the paper, the general approach is outlined below:
