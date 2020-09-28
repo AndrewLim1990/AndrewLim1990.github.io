@@ -9,7 +9,7 @@ header:
 ---
 
 ## Introduction
-In this post, I will be going over an automatic text summarization approach that I've implemented heavily based off of [this research paper by TODO](). Text summarization is a natural language processing task of taking long form documents and condensing them in two or three sentences. Following the approach from the paper, the general approach is outlined below:
+In this post, I will be going over an automatic text summarization approach that I've implemented heavily based off of [this research paper by Chen and Bansal](https://www.aclweb.org/anthology/P18-1063/). Text summarization is a natural language processing task of taking long form documents and condensing them in two or three sentences. Following the approach from the paper, the general approach is outlined below:
 
 Select sentences for extraction
 Create abstract summaries from extracted sentences
@@ -172,7 +172,7 @@ for i in range(n_ext_sents):
 
 ```
 
-Please [click here]() for a jupyter notebook containing a working example of this code.
+Please [click here](https://github.com/AndrewLim1990/bert-ext-abs-rl-summarization) for a jupyter notebook containing a working example of this code.
 
 ### Learning
 In order to improve model parameters, we use the cross-entropy loss function:
