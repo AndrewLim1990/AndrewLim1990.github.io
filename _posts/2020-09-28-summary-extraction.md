@@ -4,7 +4,7 @@ date:   2020-09-28 16:20:00
 categories: [machine-learning]
 tags: [machine-learning]
 header:
-  overlay_image: /assets/images/dice.jpg
+  overlay_image: /assets/images/books.jpg
   caption: "Photo credit: [**Unsplash**](https://unsplash.com)"
 ---
 
