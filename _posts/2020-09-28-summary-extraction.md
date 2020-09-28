@@ -1,6 +1,6 @@
 ---
 title:  "Natural Language Processing Summarization: Extraction"
-date:   2020-06-26 15:04:23
+date:   2020-09-28 16:20:00
 categories: [machine-learning]
 tags: [machine-learning]
 header:
