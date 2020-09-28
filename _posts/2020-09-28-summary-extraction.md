@@ -17,20 +17,20 @@ Use reinforcement learning to improve extraction and abstraction
 
 Personally, I like this approach for several reasons:
 
-It has a high level of intuition. When I am summarizing an article, I usually perform similar tasks where I find key parts of the article that are important (extraction) and try to put them into my own words (abstraction).
-The approach is relatively modular. The extraction and abstraction steps can be trained independently from each other.
-It uses reinforcement learning which an area of interest for me
-The original paper's authors have provided code that I could refer to if I didn't understand anything mentioned in the paper.
+* It has a high level of intuition. When I am summarizing an article, I usually perform similar tasks where I find key parts of the article that are important (extraction) and try to put them into my own words (abstraction).
+* The approach is relatively modular. The extraction and abstraction steps can be trained independently from each other.
+* It uses reinforcement learning which an area of interest for me
+* The original paper's authors have provided code that I could refer to if I didn't understand anything mentioned in the paper.
 
 In this particular post, I will go into detail regarding the extraction step as well as provide code for my implementation. In future posts I will cover the abstraction and reinforcement learning steps. For now, let's get a better idea as to how this approach works.
-Problem Formulation
+
+## Problem Formulation
 Ultimately, we want to create abstraction summarizations of news articles. For example we would want to turn this:
 
 >( cnn ) share , and your gift will be multiplied . that may sound like an esoteric adage , but when zully broussard selflessly decided to give one of her kidneys to a stranger , her generosity paired up with big data . it resulted in six patients receiving transplants . that surprised and wowed her . " i thought i was going to help this one person who i don't know , but the fact that so many people can have a life extension , that 's pretty big , " broussard told cnn affiliate kgo . she may feel guided in her generosity by a higher power . " thanks for all the support and prayers , " a comment on a facebook page in her name read….
 
 Into this:
 >zully broussard decided to give a kidney to a stranger . a new computer program helped her donation spur transplants for six kidney patients .
-
 
 To accomplish this, as mentioned above, our strategy is to first select a few important sentences from the original document. 
 
@@ -55,7 +55,12 @@ Although the original dataset provides us with most of what we need to start usi
 ```
 
 In the above, 'extraction_label' represents our pseudo labels and has a value that corresponds to each sentence within the original document. A value of '1' indicates that the sentence should be extracted based off of the ROUGE-L calculation
+
 ## Extraction Details
+
+![extractor](/assets/images/extractor.png)
+
+*Figure 1: The image above shows the general architecture of the extractor.* 
 
 This section describes the steps involved with deciding which sentences to extract.
 
