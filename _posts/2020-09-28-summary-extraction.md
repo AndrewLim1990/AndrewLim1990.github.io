@@ -83,13 +83,15 @@ In the above, each word within the input corresponds to an embedding row within 
 
 Why do we add these tokens? In addition to language modeling, BERT models are also trained for next sentence prediction (NSP). Given a pair of sentences, the BERT model is tasked to predict if the two sentences actually appear together within the source documents. For example:
 
-“[CLS] A man in Florida was fined by police for indecent exposure in front of an elderly care home. [SEP] Penguins love to eat fish.”
-“[CLS] A man in Florida was fined by police for indecent exposure in front of an elderly care home. [SEP] The man was arrested on 2PM Sunday Sept 27th and was found to be heavily influenced by drugs and alcohol.”
+> “[CLS] A man in Florida was fined by police for indecent exposure in front of an elderly care home. [SEP] Penguins love to eat fish.”
+
+> “[CLS] A man in Florida was fined by police for indecent exposure in front of an elderly care home. [SEP] The man was arrested on 2PM Sunday Sept 27th and was found to be heavily influenced by drugs and alcohol.”
 
 In the first example, the classifier embedding, once passed through a simple feed forward layer, would result in a low probability. The second would result in a high probability. 
 
 Although the classifier token was originally trained for NSP, in this approach, it has been repurposed to represent the entire sentence for the purpose of extraction. As a result, we are able to have an embedding for each sentence within a document.
-LSTM
+
+### LSTM
 Since BERT sentence embeddings are bi-directional in nature, they already capture the context of the words around it. However, in keeping with the original paper, sentence embeddings are passed through a bi-directional LSTM. This is arguably not necessary as one of the benefits of using a bi-directional LSTM is that it captures the context of the words around it.
 
 The hidden states obtained at each step are used to represent new sentence embeddings. The input to the bi-LSTM is of shape: `(batch_size, n_sentences, bert_embedding_size)` and the output is of shape: `(batch_size, n_sentences, bi_lstm_hidden_size*2)`.  Note: The *2 is because the LSTM is bi-directional and we concatenate the embedding from each direction. 
@@ -182,9 +184,9 @@ Please [click here](https://github.com/AndrewLim1990/bert-ext-abs-rl-summarizati
 ### Learning
 In order to improve model parameters, we use the cross-entropy loss function:
 
-$$J = \sum{y_{i}log(\hat{y_{i}})$$
+![cross-entropy-loss](assets/images/cross-entropy.png)
 
-Using the output from step 9 in the previous section, we obtain an extraction probability for each sentence within the article. The extraction probability is plugged into the loss function as $\hat{y}$ and we can optimize using gradient descent to iteratively improve the weights of the following models:
+Using the output from step 9 in the previous section, we obtain an extraction probability for each sentence within the article. The extraction probability is plugged into the loss function as ŷ and we can optimize using gradient descent to iteratively improve the weights of the following models:
 
 Bi-Directional LSTM network used to refine the output from the simple feed forward layer
 Pointer LSTM network used to assign extraction probabilities
