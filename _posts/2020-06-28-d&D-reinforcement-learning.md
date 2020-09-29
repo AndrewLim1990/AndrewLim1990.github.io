@@ -10,7 +10,7 @@ header:
 
 # Dungeons and Data
 
-This blog post is a first in a series in which I apply machine learning to the world of Dungeons and Dragons. In this blog post, I apply reinforcement learning algorithms to a simple [Dungeons and Dragons combat](https://www.youtube.com/watch?v=7tnrATiclg4) scenario. The code associated with this blog post can be seen [in this github repo](https://github.com/AndrewLim1990/dungeonsNdata).
+In this blog post, I apply reinforcement learning algorithms to a simple [Dungeons and Dragons combat](https://www.youtube.com/watch?v=7tnrATiclg4) scenario. The code associated with this blog post can be seen [in this github repo](https://github.com/AndrewLim1990/dungeonsNdata).
 
 ## Combat Scenario Description
 
@@ -201,20 +201,9 @@ Although I was not able achieve as high of a win percentage as the dueling doubl
 ## Conclusion
 
 Here are some key takeaways I gained from this project:
-1. Be patient. Reinforcement learning takes a long time. When I first started, I would often stop training an agent prematurely if it hadn't shown early signs of success or saw if there was dip in performance. However, I later learned that agents could overcome areas of low performance and even surpass previous performance highs.  
+
+1. Reinforcement learning can take a long time. When I first started, I would often stop training an agent prematurely if it hadn't shown early signs of success or saw if there was dip in performance. However, I later learned that agents could overcome areas of low performance and even surpass previous performance highs.  
 2. Learning rate is almost always the most imporant hyper parameter.
 3. Implement algorithms in small and simple scenarios first. This helps immensely with debugging and speeding iteration cycles.
 4. It's a good idea to make your solution fast and scalable. This is an area I neglected and a large source of frustration for me. Operating on a slow iteration cycle was painful with instances in which I waited for days for the agent to learn a reasonable strategy only to find out there was a bug or that I wanted to adjust a hyperparameter. If I had made my solution more scalable, I could have cut down on the time waiting around.
-5. Don't let perfection get in the way of progress. Is my code a piece of low quality? Yes. Did I learn a lot by doing this? Yes x 100. While building, I found it hard to resist the temptation to backtrack in order tooptimize/refactor large portions of code. Rather than get bogged down by this, I opted to push onward just to get a functional solution. In hindsight, I am very glad I opted to do this because there were many other more important and interesting (relevant to RL) problems that arose. 
-
-In future work, I want to:
- 
- 1. Analyze the behavior of resulting agents more closely in order to observe what an optimal strategy would look like. At a quick glance, the agent seemed to have learned to:
-     * `ShootArrow` if it had not already taken an attack action
-     * `Move` if it had remaining movement
-     * `EndTurn` if no movement and attacks remained
-  However, I'm not sure how the agent `Move`'d. Did it learn to move away from the location of `Strahd` in order to avoid damage? This requires more investigation. 
- 2. Apply RL algorithms to more complicated combat scenarios
- 3. Apply NLP to the story telling aspect of D&D:
-     * Summarization of Critical Role episodes
-     * Question and answering of events within a Critical Role episode
+5. Don't let perfection get in the way of progress. Is my code a piece of low quality? Yes. Did I learn a lot by doing this? Yes

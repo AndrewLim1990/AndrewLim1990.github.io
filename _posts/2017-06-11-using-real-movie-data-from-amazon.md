@@ -713,13 +713,3 @@ Try hovering over these points, the movie title should display!
 ### Closing Notes:
 
 Unfortunately, these groups don't seem to make immediate sense. Honestly, the trends within groups that seem to be present are probably by luck. It would be nice to see groups of movies that had an obvious theme going on such as genre or time when released. Perhaps in the future, we can make better groups if we use more latent features (we used 2 in this case).
-
-In future blog posts I plan to:
-* Scale up to use more data and use regularization
-* Create a twitter bot that may be able to identify which movies are trending on social media
-    * This can be used to promote movies that are trending to people that we predicted would give it a high rating.
-    * The same idea can be applied to Amazon's "Toys and Games" data set. My thought that it would be able to promote something like a fidget spinner to people which seems to be all the rage now a days.
-* Create better models be adding more features to our dataset. This can easily be done by altering our mini batch gradient descent loop.
-* We may be able to find more interesting patterns if we account for bias by subtracting from each rating by each person's average rating as well as the average rating for each movie
-
-Please let me know if you have any other cool ideas/questions/suggestions/**found mistakes**! My e-mail is andrewlim90@gmail.com
