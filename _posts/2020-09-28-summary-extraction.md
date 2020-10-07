@@ -187,7 +187,7 @@ Please [click here](https://github.com/AndrewLim1990/bert-ext-abs-rl-summarizati
 ### Learning
 In order to improve model parameters, we use the cross-entropy loss function:
 
-![cross-entropy-loss](assets/images/cross-entropy.png)
+![cross-entropy-loss](/assets/images/cross-entropy.png)
 
 Using the output from step 9 in the previous section, we obtain an extraction probability for each sentence within the article. The extraction probability is plugged into the loss function as ŷ and we optimize using gradient descent to iteratively improve the weights of the following models:
 
