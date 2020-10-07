@@ -182,7 +182,7 @@ for i in range(n_ext_sents):
 
 ```
 
-Please [click here](https://github.com/AndrewLim1990/bert-ext-abs-rl-summarization) for a jupyter notebook containing a minimum working example of this code.
+Please [click here](https://github.com/AndrewLim1990/bert-ext-abs-rl-summarization/blob/master/demo.ipynb) for a jupyter notebook containing a minimum working example of this code.
 
 ### Learning
 In order to improve model parameters, we use the cross-entropy loss function:
